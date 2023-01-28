@@ -1,7 +1,5 @@
-import Avatar from './avatar'
 import DateFormatter from './date-formatter'
 import PostTitle from './post-title'
-import type Author from '../interfaces/author'
 
 type Props = {
   title: string
@@ -10,12 +8,12 @@ type Props = {
 
 const PostHeader = ({ title, date }: Props) => {
   return (
-    <>
+    <div className='py-2'>
       <PostTitle>{title}</PostTitle>
         <div className="mb-6 text-lg">
           <DateFormatter dateString={date} />
       </div>
-    </>
+    </div>
   )
 }
 

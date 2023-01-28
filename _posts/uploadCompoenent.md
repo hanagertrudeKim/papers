@@ -3,25 +3,18 @@ title: 'antd를 활용한 upload component의 api request와 response의 타입 
 date: '2020-03-16T05:35:07.322Z'
 ---
 
-Title: antd를 활용한 upload component의 api request와 response의 타입 에러
 
-Incident date: 2023/01/16 ~ 2023/01/21
+### Summary
+antd를 활용해 upload component를 만드는 과정에서 api request와 response의 타입 에러가 계속해서 발생하였음. form을 통해 제출해야하는 api `response` 타입과 직접 antd를 통해 set되는 value의 타입이 달라 문제가 생김. `http 501`, `http 400` 에러가 같이 생겨남
 
-Owner: me
-
-Tags: #antd #upload #typeScript 
-
-
-Summary: antd를 활용해 upload component를 만드는 과정에서 api request와 response의 타입 에러가 계속해서 발생하였음. form을 통해 제출해야하는 api `response` 타입과 직접 antd를 통해 set되는 value의 타입이 달라 문제가 생김. `http 501`, `http 400` 에러가 같이 생겨남
-
-Supporting data : 
+### Supporting data
 - formData
 	- formData는 규정상 원래 콘솔에서는 확인이 불가(network 의 payload도 마찬가지)
 - file upload 로직
 	- formData를 file api로 전달하고 파일 url변환
 	- url을 post 배열에 담아 처리
 
-Incident Response Analysis(사고 대응 분석) : 
+### Incident Response Analysis 
 <u>api의 형식에 맞는 배열 따로, antd의 형식에 맞는 배열 따로 생성</u>
 	1.  api 형식에 맞는 배열 따로 만들고 api에 PUT시키기
 	2. antd의 형식으로 변환한 배열을 따로 만들어 화면상의 렌더링전용(?)으로 사용하기
@@ -65,7 +58,7 @@ const convertUploadFile = (fileUrl: string, index: number): UploadFile => {
 ```
 
 
-Post-Incident Analysis(사후 분석) :
+### Post-Incident Analysis
 - TypeError문제 
 	- api에 전체 데이터를 put할때의 image_url의 type은 `string`
 	- antd를 통해 실제 담기는 filel의 type은 antd전용 객체인 `uploadFile` 
@@ -75,10 +68,10 @@ Post-Incident Analysis(사후 분석) :
 	- 파일 업로드 api에 requst방법과 response가 무엇인지 제대로 인지하지 못했음.
 	- 파일 업로드 api는 formData를 받아 file의 전용url을 변환해주는 역할을 함.
 
-Timeline: 
+### Timeline
 ![[Pasted image 20230126220336.png]]
 
-Lessons Learned: 
+### Lessons Learned
 - 에러 상태 확인
 - api response, request type 확인
 - 이용하는 라이브러리 parameter 공식문서 확인하기

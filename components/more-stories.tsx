@@ -8,10 +8,10 @@ type Props = {
 const MoreStories = ({ posts }: Props) => {
   return (
     <section>
-      <h2 className="mb-8 text-5xl tracking-tighter underline">
+      <h2>
         papers
       </h2>
-      <div>
+      <ul className='list-disc text-[#23527C]'>
         {posts.map((post) => (
           <PostPreview
             key={post.slug}
@@ -20,7 +20,7 @@ const MoreStories = ({ posts }: Props) => {
             slug={post.slug}
           />
         ))}
-      </div>
+      </ul>
     </section>
   )
 }
