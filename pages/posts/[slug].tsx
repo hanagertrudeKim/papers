@@ -1,26 +1,25 @@
-import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
-import Container from '../../components/container'
-import PostBody from '../../components/post-body'
-import Header from '../../components/header'
-import PostHeader from '../../components/post-header'
-import Layout from '../../components/layout'
-import { getPostBySlug, getAllPosts } from '../../lib/api'
-import PostTitle from '../../components/post-title'
-import Head from 'next/head'
-import markdownToHtml from '../../lib/markdownToHtml'
-import type PostType from '../../interfaces/post'
+import { useRouter } from "next/router";
+import ErrorPage from "next/error";
+import Container from "../../components/container";
+import PostBody from "../../components/post-body";
+import PostHeader from "../../components/post-header";
+import Layout from "../../components/layout";
+import { getPostBySlug, getAllPosts } from "../../lib/api";
+import PostTitle from "../../components/post-title";
+import Head from "next/head";
+import markdownToHtml from "../../lib/markdownToHtml";
+import type PostType from "../../interfaces/post";
 
 type Props = {
-  post: PostType
-  morePosts: PostType[]
-  preview?: boolean
-}
+  post: PostType;
+  morePosts: PostType[];
+  preview?: boolean;
+};
 
 export default function Post({ post }: Props) {
-  const router = useRouter()
+  const router = useRouter();
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
   return (
     <Layout>
@@ -29,39 +28,29 @@ export default function Post({ post }: Props) {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className='prose prose-sm'>
+            <article className="prose prose-sm">
               <Head>
-                <title>
-                  {post.title}
-                </title>
+                <title>{post.title}</title>
               </Head>
-              <PostHeader
-                title={post.title}
-                date={post.date}
-              />
+              <PostHeader title={post.title} date={post.date} />
               <PostBody content={post.content} />
             </article>
           </>
         )}
       </Container>
     </Layout>
-  )
+  );
 }
 
 type Params = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'content',
-  ])
-  const content = await markdownToHtml(post.content || '')
+  const post = getPostBySlug(params.slug, ["title", "date", "slug", "content"]);
+  const content = await markdownToHtml(post.content || "");
 
   return {
     props: {
@@ -70,11 +59,11 @@ export async function getStaticProps({ params }: Params) {
         content,
       },
     },
-  }
+  };
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = getAllPosts(["slug"]);
 
   return {
     paths: posts.map((post) => {
@@ -82,8 +71,8 @@ export async function getStaticPaths() {
         params: {
           slug: post.slug,
         },
-      }
+      };
     }),
     fallback: false,
-  }
+  };
 }

@@ -1,18 +1,22 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
 }
 
 .markdown p,
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6;
+  font-size: 12px;
 }
 
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.21em;
+  margin-bottom: 2vw;
 }

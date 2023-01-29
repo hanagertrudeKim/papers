@@ -1,39 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap");
 
 body {
-    font-size: 15px;
-}
-
-title {
-    height: 1px;
-    border: 0;
-    box-shadow: inset 0 6px 6px -6px rgba(0,0,0,0.5);
-    background: white;
-    width: 100%;
-    margin-bottom: 30px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
 }
 
 .prose {
-  max-width: 83vw;
+  max-width: 80vw;
 }
 
 summary {
-  font-size:120%;
-    color: #808080;
-  margin:20px 0px 20px 0px;
-    border-left: 5px solid #ED1951;
-    padding-left: 10px;
+  font-size: 120%;
+  color: #808080;
+  margin: 20px 0px 20px 0px;
+  border-left: 5px solid #ed1951;
+  padding-left: 10px;
 }
 
-h1, .h1 { font-size: 29px; }
-h2, .h2 { font-size: 24px; }
-h3, .h3 { font-size: 20px; }
-h4, .h4 { font-size: 18px; }
+h1,
+.h1 {
+  font-size: 22px;
+}
+h2,
+.h2 {
+  font-size: 18px;
+}
+h3,
+.h3 {
+  font-size: 15px;
+}
+h4,
+.h4 {
+  font-size: 13px;
+}
 
-h2, h3 { padding-top : 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
+h2,
+h3 {
+  padding: 8px 0;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.21em;
+  margin-bottom: 1vw;
+}
 
 ul {
   padding: revert;

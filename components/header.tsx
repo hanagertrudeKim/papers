@@ -1,14 +1,58 @@
-import Link from 'next/link'
+import Link from "next/link";
+import styled from "styled-components";
+
+const HeaderWrap = styled.div`
+  padding: 30px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+`;
+
+const Logo = styled.div`
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  position: absolute;
+  left: 20px;
+  color: #323232;
+`;
+
+const CategoryBox = styled.div`
+  display: flex;
+`;
+
+const Category = styled.div`
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0px 2em;
+  text-transform: capitalize;
+  :hover {
+    font-weight: 600;
+    font-size: 13px;
+    color: #b70339;
+    cursor: pointer;
+    font-style: italic;
+  }
+`;
 
 const Header = () => {
   return (
-    <h1 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href="/" className="hover:underline">
-        paper
-      </Link>
-      .
-    </h1>
-  )
-}
+    <HeaderWrap>
+      <Logo>
+        <Link href="/" className="hover:underline">
+          hanagertrudeKim
+        </Link>
+      </Logo>
+      <CategoryBox>
+        <Category>
+          <Link href="/">Paper</Link>
+        </Category>
+        <Category>Project</Category>
+        <Category>Lab</Category>
+      </CategoryBox>
+    </HeaderWrap>
+  );
+};
 
-export default Header
+export default Header;

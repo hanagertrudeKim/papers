@@ -1,20 +1,28 @@
-import DateFormatter from './date-formatter'
-import PostTitle from './post-title'
+import DateFormatter from "./date-formatter";
+import PostTitle from "./post-title";
+import styled from "styled-components";
 
 type Props = {
-  title: string
-  date: string
-}
+  title: string;
+  date: string;
+};
+
+const Wrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 const PostHeader = ({ title, date }: Props) => {
   return (
-    <div className='py-2'>
+    <Wrap>
       <PostTitle>{title}</PostTitle>
-        <div className="mb-6 text-lg">
-          <DateFormatter dateString={date} />
+      <div>
+        <DateFormatter dateString={date} />
       </div>
-    </div>
-  )
-}
+    </Wrap>
+  );
+};
 
-export default PostHeader
+export default PostHeader;

@@ -1,17 +1,20 @@
-import PostPreview from './post-preview'
-import type Post from '../interfaces/post'
+import PostPreview from "./post-preview";
+import type Post from "../interfaces/post";
+import styled from "styled-components";
 
 type Props = {
-  posts: Post[]
-}
+  posts: Post[];
+};
+
+const PostWrap = styled.ul`
+  color: #23527c;
+`;
 
 const MoreStories = ({ posts }: Props) => {
   return (
     <section>
-      <h2>
-        papers
-      </h2>
-      <ul className='list-disc text-[#23527C]'>
+      <h2>papers</h2>
+      <PostWrap className="list-disc">
         {posts.map((post) => (
           <PostPreview
             key={post.slug}
@@ -20,9 +23,9 @@ const MoreStories = ({ posts }: Props) => {
             slug={post.slug}
           />
         ))}
-      </ul>
+      </PostWrap>
     </section>
-  )
-}
+  );
+};
 
-export default MoreStories
+export default MoreStories;

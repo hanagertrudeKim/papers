@@ -1,17 +1,27 @@
-import Container from './container'
+import Link from "next/link";
+import Container from "./container";
+import styled from "styled-components";
+
+const FooterWrap = styled.footer`
+  padding: 15px;
+  margin-top: 30px;
+  border-top: rgb(238 238 238) 1px solid;
+  background-color: #f8f8f8;
+`;
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral-50 border-t">
+    <FooterWrap>
       <Container>
-        <div className="py-5 flex flex-col">
-          <h3>
-            Statically Generated with Next.js.
-          </h3>
-        </div>
+        <Link
+          href="https://github.com/hanagertrudekim/papers"
+          className="hover:underline"
+        >
+          Github
+        </Link>
       </Container>
-    </footer>
-  )
-}
+    </FooterWrap>
+  );
+};
 
-export default Footer
+export default Footer;

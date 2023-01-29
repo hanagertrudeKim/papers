@@ -1,11 +1,18 @@
+import styled from "styled-components";
+
+const Wrap = styled.div`
+  margin-bottom: 40px;
+`;
+
 const Intro = () => {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-4">
-        Blog.
-      </h1>
-    </section>
-  )
-}
+    <Wrap>
+      <h3>Introduction</h3>
+      <ul className="list-disc">
+        <li>간단하게 paper 정리</li>
+      </ul>
+    </Wrap>
+  );
+};
 
-export default Intro
+export default Intro;

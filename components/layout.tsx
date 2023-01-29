@@ -1,23 +1,28 @@
-import Footer from './footer'
-import Header from './header'
-import Meta from './meta'
+import Footer from "./footer";
+import Header from "./header";
+import Meta from "./meta";
+import styled from "styled-components";
 
 type Props = {
-  preview?: boolean
-  children: React.ReactNode
-}
+  preview?: boolean;
+  children: React.ReactNode;
+};
+
+const Wrap = styled.div`
+  padding: 40px 15vw;
+`;
 
 const Layout = ({ preview, children }: Props) => {
   return (
     <>
       <Meta />
       <Header />
-      <div className="min-h-screen">
+      <Wrap className="min-h-screen">
         <main>{children}</main>
-      </div>
+      </Wrap>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
