@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Wrap = styled.div`
-  padding: 40px 15vw;
+  padding: 40px 12vw;
 `;
 
 const Layout = ({ preview, children }: Props) => {

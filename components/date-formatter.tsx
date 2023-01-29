@@ -6,11 +6,7 @@ type Props = {
 };
 
 const Wrap = styled.div`
-  padding: 0 0 40px;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 20px;
-  letter-spacing: 0.17em;
+  padding: 0px 15px;
 `;
 
 const DateFormatter = ({ dateString }: Props) => {

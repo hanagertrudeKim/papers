@@ -6,11 +6,12 @@ type Props = {
 };
 
 const Wrap = styled.div`
-  padding: 50px 0 30px;
-  font-weight: 600;
-  font-size: 19px;
-  line-height: 20px;
-  letter-spacing: 0.21em;
+  padding: 20px 0;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 25px;
+  margin-bottom: 1vw;
+  font-weight: 500;
 `;
 
 const Title = styled.div``;

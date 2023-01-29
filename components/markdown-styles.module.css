@@ -1,22 +1,29 @@
 .markdown {
-  font-family: "Inter", sans-serif;
-  font-weight: 200;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 14px;
+  text-transform: capitalize;
 }
 
-.markdown p,
 .markdown ul,
-.markdown ol,
-.markdown blockquote {
-  font-size: 12px;
+.markdown ol {
+  margin: 0;
+  padding-top: 0;
 }
 
 .markdown h2 {
+  padding: 8px 0;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 24px;
+  margin-bottom: 1vw;
+  font-weight: 500;
 }
 
 .markdown h3 {
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: 0.21em;
-  margin-bottom: 2vw;
+  padding: 8px 0;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 22px;
+  margin-bottom: 1vw;
+  font-weight: 500;
 }

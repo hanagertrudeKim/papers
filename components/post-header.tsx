@@ -8,19 +8,24 @@ type Props = {
 };
 
 const Wrap = styled.div`
+  position: relative
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  margin-bottom: 5vw;
+`;
+
+const DateWrap = styled.div`
+  position: absolute;
+  right: 15vw;
 `;
 
 const PostHeader = ({ title, date }: Props) => {
   return (
     <Wrap>
       <PostTitle>{title}</PostTitle>
-      <div>
+      <DateWrap>
         <DateFormatter dateString={date} />
-      </div>
+      </DateWrap>
     </Wrap>
   );
 };
