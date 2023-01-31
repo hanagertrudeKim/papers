@@ -1,4 +1,4 @@
-import PostPreview from "./post-preview";
+import PostPreview from "./post/post-preview";
 import type Post from "../interfaces/post";
 import styled from "styled-components";
 

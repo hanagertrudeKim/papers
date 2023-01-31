@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Container from "./container";
+import Container from "../container";
 import styled from "styled-components";
 
 const FooterWrap = styled.footer`

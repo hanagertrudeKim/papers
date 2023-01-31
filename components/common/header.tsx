@@ -48,7 +48,9 @@ const Header = () => {
         <Category>
           <Link href="/">Paper</Link>
         </Category>
-        <Category>Project</Category>
+        <Category>
+          <Link href="/Project">Project</Link>
+        </Category>
         <Category>Lab</Category>
       </CategoryBox>
     </HeaderWrap>
