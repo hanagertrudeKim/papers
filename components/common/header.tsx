@@ -16,6 +16,9 @@ const Logo = styled.div`
   position: absolute;
   left: 20px;
   color: #323232;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const CategoryBox = styled.div`
@@ -39,7 +42,7 @@ const Category = styled.div`
 const Header = () => {
   return (
     <HeaderWrap>
-      <Logo>
+      <Logo className="logo">
         <Link href="/" className="hover:underline">
           hanagertrudeKim
         </Link>
