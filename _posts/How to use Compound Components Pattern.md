@@ -1,7 +1,6 @@
-
 ---
 title: 'How to use Compound Components Pattern'
-date: '2023/02/06'
+date: '2023-02-06T05:35:07.322Z'
 ---
 
 ## Compound Components Pattern
