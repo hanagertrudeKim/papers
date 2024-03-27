@@ -1,29 +1,75 @@
 .markdown {
   font-family: "Nanum Gothic", sans-serif;
-  font-size: 14px;
   text-transform: capitalize;
+  color: white;
+}
+
+.markdown p{
+  font-size: 18px;
+}
+
+.markdown strong {
+  font-weight: 600;
+  color: bisque;
 }
 
 .markdown ul,
 .markdown ol {
   margin: 0;
   padding-top: 0;
+  font-size: 18px;
+  color: white;
 }
 
 .markdown h2 {
   padding: 8px 0;
   margin: 10px 0;
-  border-bottom: 1px solid #ddd;
   font-size: 24px;
-  margin-bottom: 1vw;
-  font-weight: 500;
+  margin: 1vw 0;
+  color: white;
 }
 
 .markdown h3 {
   padding: 8px 0;
   margin: 10px 0;
-  border-bottom: 1px solid #ddd;
   font-size: 22px;
   margin-bottom: 1vw;
-  font-weight: 500;
+  color: white;
+}
+
+.markdown a {
+  color: white;
+}
+
+.markdown code {
+  color: #f8f8f2;
+}
+
+.markdown pre[class*='language-'] {
+  color: #f8f8f2;
+  background: none;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  padding: 3em 2.5em;
+  font-size: 1.2em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+  background: #282C35 ;
 }

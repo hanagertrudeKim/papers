@@ -5,9 +5,7 @@ type Props = {
   dateString: string;
 };
 
-const Wrap = styled.div`
-  padding: 0px 15px;
-`;
+const Wrap = styled.div``;
 
 const DateFormatter = ({ dateString }: Props) => {
   const date = parseISO(dateString);

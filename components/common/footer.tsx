@@ -6,7 +6,6 @@ const FooterWrap = styled.footer`
   padding: 15px;
   margin-top: 30px;
   border-top: rgb(238 238 238) 1px solid;
-  background-color: #f8f8f8;
 `;
 
 const Footer = () => {

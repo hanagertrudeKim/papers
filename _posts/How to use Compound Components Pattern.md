@@ -1,44 +1,19 @@
 ---
-title: 'How to use Compound Components Pattern'
-date: '2023-02-06T05:35:07.322Z'
+title: '🤔 How to use Compound Components Pattern'
+date: '2023-02-06'
 ---
 
 ## Compound Components Pattern
 
-- 조합 컴포넌트 패턴이란
-	- 하나의 컴포넌트를 여러 가지 집합체로 분리한 뒤, 분리된 각 컴포넌트를 사용하는 쪽에서 조합해 사용하는 컴포넌트 패턴
-	- props drilling으로 인해 발생하는 문제를 해결하는 하나의 대안책이 될수있다.
-		-  prop drilling이란
-		- react 컴포넌트 트리에서 하위 컴포넌트로 데이터를 전달하기 위한 방법
-		- 전역변수를 설정하는대신 prop drilling을 사용하면 
-			- 수정할때 코드를 따라 추적하기가 쉽고
-				- 보다 명시적으로 데이터를 주고받을수있다.
-			- 하지만 prop drilling 이 일으킬수있는 문제도 존재
-				- 요구 사항이 복잡해지고 더 다양한 상황들을 고려해야할때, 이에 따라 컴포넌트의 계층이 복잡해진다면
-				- 부모 컴포넌트에서 전달해야하는 props 또한 많아질것이다.
-					- 이는 상태관리가 복잡해지고
-					- 유지보수가 힘들어지고
-					- 필요보다 많거나, 내지는 필요없는 props를 전달할수도 있음
-			-  => 시기에 적절히 판단하여 사용해야한다.
-	- 조합 컴포넌트를 통해 관심사를 분리할수있음
-		- 한가지의 기능을 책임지는 컴포넌트 조각들로 나눌수있음
-		- 이들을 조합해 사용함으로써 의미론적인 결과를 만들어냄 
-	- 복잡성을 해결해줌
-		- 직관적으로 파악하기 쉬워 가독성을 개선함
-		- 변화에 유연하게 대처할수있다.
+조합 컴포넌트 패턴은 하나의 컴포넌트를 여러 가지 집합체로 분리한 뒤, 분리된 각 컴포넌트를 사용하는 쪽에서 조합해 사용하는 패턴이다. 이는 props drilling으로 인해 발생하는 문제를 해결하는 대안책으로 작용할 수 있다. Prop drilling은 React 컴포넌트 트리에서 하위 컴포넌트로 데이터를 전달하기 위한 방법으로, 전역 변수를 설정하는 대신 prop drilling을 사용하면 코드를 추적하기가 쉽고 데이터를 명시적으로 주고 받을 수 있다. 그러나 prop drilling이 일으킬 수 있는 문제도 존재한다. 요구 사항이 복잡해지고 다양한 상황을 고려해야 할 때, 컴포넌트의 계층이 복잡해지면 부모 컴포넌트에서 전달해야 하는 props도 많아지며 이는 상태 관리와 유지보수를 어렵게 할 수 있다. 따라서 조합 컴포넌트를 적절히 판단하여 사용해야 한다. 이 패턴을 통해 관심사를 분리할 수 있고, 한 가지의 기능을 책임지는 컴포넌트 조각들로 나누어 의미 있는 결과를 만들어 낼 수 있으며, 이는 복잡성을 해결하고 직관적인 파악과 가독성을 향상시키며 변화에 유연하게 대처할 수 있다.
 
 ## Compound Form Components
 
-- Compound Form Component
-	- 기본적으로 재사용 가능한 컴포넌트에 근거해야한다.
-		- form의 입력되는 데이터간의 의존성을 낮춘다.
-			- 어떤 데이터가 들어오든지 그에 근거하지않고 처리할수있다.
-		- 의존성을 낮추면 도메인과의 결합도가 낮아지기 때문에 
-		- 범용적으로 form이 필요한 모든곳에 custom해 사용할수있게된다.
-	- Form Component의 경우 책임을 form의 기능, 죵류에 따라 나눌수있다.
-		- 적절한 컴포넌트 단위로 나누는것이 중요한데,
-		- 이또한 사용하는 라이브러리 툴에 따라 달라질수있다.
-		- 현재 사용하는 [ant design](https://ant.design/) 를 사용한다면
+Compound Form Component
+기본적으로 재사용 가능한 컴포넌트에 근거해야한다. form의 입력되는 데이터간의 의존성을 낮춘다. 어떤 데이터가 들어오든지 그에 근거하지않고 처리할수있다.
+의존성을 낮추면 도메인과의 결합도가 낮아지기 때문에 범용적으로 form이 필요한 모든곳에 custom해 사용할수있게된다.
+Form Component의 경우 책임을 form의 기능, 죵류에 따라 나눌수있다. 적절한 컴포넌트 단위로 나누는것이 중요한데, 이또한 사용하는 라이브러리 툴에 따라 달라질수있다.
+현재 사용하는 [ant design](https://ant.design/) 를 사용한다면
 			- input
 			- text area
 			- checkbox
@@ -46,7 +21,7 @@ date: '2023-02-06T05:35:07.322Z'
 			- select
 			- upload
 			- modal
-		- 등 UI 단위로 나눌수있다.
+등 UI 단위로 나눌수있다.
 
 
 ### 구현
@@ -55,7 +30,8 @@ date: '2023-02-06T05:35:07.322Z'
 	- antd의 UI를 기준으로 컴포넌트를 만들어낸다.
 
 - input component 
-```jsx
+
+```js
 function CustomInput({
   label, name, rules, disabled, ...args
 }: FormItemProps & InputProps) {
@@ -68,7 +44,7 @@ function CustomInput({
 ```
 
 - checkbox component
-```jsx
+```js
 function CustomCheckbox({
   name,
   children,
@@ -85,7 +61,7 @@ function CustomCheckbox({
 ```
 
 - button component
-```jsx
+```js
 function CustomButton({
   children,
   danger,
@@ -112,7 +88,7 @@ function CustomButton({
 - 서브컴포넌트를 묶어 export 하기
 	- 서브 컴포넌트들을 CutomForm의 객체로 지정해주어 export 한다.
 	- 각각의 컴포넌트가 CustomForm으로 통일되기때문에 가독성에도 도움을 줄수있다.
-```jsx 
+```js
 //exapmle
 
 const CustomForm = Object.assign(Form, {
@@ -136,7 +112,7 @@ export default CustomForm;
 - Usage
 	- 직관적으로 `CustomForm` 으로 통일되어 일관성있게 짤수잇음
 	- 중간에 추가를 해야한다면 추가하기에 용이함.
-```jsx
+```js
 <CustomForm>
       <CustomForm.Input label="방이름" name="name" />
       <CustomForm.GridRow gridColumns="1fr 1fr">

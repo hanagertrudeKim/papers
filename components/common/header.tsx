@@ -2,20 +2,18 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const HeaderWrap = styled.div`
-  padding: 30px 30px;
+  padding: 30px 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
 `;
 
 const Logo = styled.div`
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 20px;
   position: absolute;
-  left: 20px;
-  color: #323232;
+  left: 60px;
   @media (max-width: 600px) {
     display: none;
   }
@@ -27,15 +25,14 @@ const CategoryBox = styled.div`
 
 const Category = styled.div`
   font-weight: 500;
-  font-size: 13px;
+  font-size: 16px;
   margin: 0px 2em;
   text-transform: capitalize;
   :hover {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 16px;
     color: #b70339;
     cursor: pointer;
-    font-style: italic;
   }
 `;
 
@@ -44,7 +41,7 @@ const Header = () => {
     <HeaderWrap>
       <Logo className="logo">
         <Link href="/" className="hover:underline">
-          hanagertrudeKim
+          hanagertrudeKim.dev
         </Link>
       </Logo>
       <CategoryBox>

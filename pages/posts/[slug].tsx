@@ -33,8 +33,8 @@ export default function Post({ post }: Props) {
                 <title>{post.title}</title>
               </Head>
               <PostHeader title={post.title} date={post.date} />
-              <PostBody content={post.content} />
-            </article>
+                <PostBody content={post.content} />
+              </article>
           </>
         )}
       </Container>

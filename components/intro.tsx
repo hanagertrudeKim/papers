@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-  margin-bottom: 40px;
+  margin: 40px 0;
 `;
 
 const Intro = () => {

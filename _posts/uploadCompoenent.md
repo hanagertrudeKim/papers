@@ -1,6 +1,6 @@
 ---
-title: "antd를 활용한 upload component의 api request와 response의 타입 에러"
-date: "2023-02-03T05:35:07.322Z"
+title: "👾 antd를 활용한 upload component의 api request와 response의 타입 에러"
+date: "2023-02-03"
 ---
 
 ### Summary

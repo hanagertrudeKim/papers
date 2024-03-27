@@ -1,7 +1,12 @@
 function AboutPage() {
   return (
-    <div>
-      <h1>the About Page</h1>
+   <div>
+      <pre className="language-js">
+        <code className="language-js">console.log("hello world")</code>
+      </pre>
+      <pre className="language-ts">
+        <code className="language-ts">console.log("hello world")</code>
+      </pre>
     </div>
   );
 }

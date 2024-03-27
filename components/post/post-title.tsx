@@ -7,11 +7,10 @@ type Props = {
 
 const Wrap = styled.div`
   padding: 20px 0;
-  margin: 10px 0;
   border-bottom: 1px solid #ddd;
-  font-size: 25px;
-  margin-bottom: 1vw;
-  font-weight: 500;
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
 `;
 
 const Title = styled.div``;

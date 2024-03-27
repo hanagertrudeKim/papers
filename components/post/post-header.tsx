@@ -8,15 +8,13 @@ type Props = {
 };
 
 const Wrap = styled.div`
-  position: relative
+  position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 5vw;
 `;
 
 const DateWrap = styled.div`
   position: absolute;
-  right: 15vw;
 `;
 
 const PostHeader = ({ title, date }: Props) => {
