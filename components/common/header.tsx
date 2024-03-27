@@ -52,9 +52,11 @@ const Header = () => {
           <Link href="/">Paper</Link>
         </Category>
         <Category>
-          <Link href="/Project">Project</Link>
+          <Link href="/project">Project</Link>
         </Category>
-        <Category>Lab</Category>
+        <Category>
+          <Link href="/about">About</Link>
+        </Category>
       </CategoryBox>
     </HeaderWrap>
   );
