@@ -1,6 +1,7 @@
 ---
 title: "👾 antd를 활용한 upload component의 api request와 response의 타입 에러"
 date: "2023-02-03"
+tag: 'Issue'
 ---
 
 ### Summary
@@ -78,8 +79,12 @@ const convertUploadFile = (fileUrl: string, index: number): UploadFile => {
   - 파일 업로드 api는 formData를 받아 file의 전용url을 변환해주는 역할을 함.
 
 ### Timeline
+![240329-001031](/posts/uploadCompoenent/240329-001031.png)
 
-![figure.1](https://github.com/hanagertrudekim/papers/blob/main/public/assets/blog/uploadComponent/1.png)
+Lessons Learned: 
+- 에러 상태 확인
+- api response, request type 확인
+- 이용하는 라이브러리 parameter 공식문서 확인하기
 
 ### Lessons Learned
 

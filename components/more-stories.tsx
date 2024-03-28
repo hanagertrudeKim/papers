@@ -28,34 +28,38 @@ const PostsWrap = styled.div`
 `;
 
 const MoreStories = ({ posts }: Props) => {
+  const renderPostsByTag = (tag) => {
+    return posts
+      .filter((post) => post.tag === tag)
+      .map((post) => (
+        <PostPreview
+          key={post.slug}
+          title={post.title}
+          date={post.date}
+          slug={post.slug}
+        />
+      ));
+  };
+
   return (
     <section>
       <Wrap className="list-disc">
         <PostsWrap>
-        <h2>papers</h2>
-          {posts.map((post) => (
-            <PostPreview
-              key={post.slug}
-              title={post.title}
-              date={post.date}
-              slug={post.slug}
-            />
-          ))}
+          <h2>Issue</h2>
+          {renderPostsByTag('Issue')}
         </PostsWrap>
         <PostsWrap>
-        <h2>papers</h2>
-          {posts.map((post) => (
-            <PostPreview
-              key={post.slug}
-              title={post.title}
-              date={post.date}
-              slug={post.slug}
-            />
-          ))}
+          <h2>DeepDive</h2>
+          {renderPostsByTag('DeepDive')}
+        </PostsWrap>
+        <PostsWrap>
+          <h2>Essay</h2>
+          {renderPostsByTag('Essay')}
         </PostsWrap>
       </Wrap>
     </section>
   );
 };
+
 
 export default MoreStories;

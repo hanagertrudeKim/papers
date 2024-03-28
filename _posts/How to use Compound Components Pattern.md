@@ -1,6 +1,7 @@
 ---
 title: '🤔 How to use Compound Components Pattern'
 date: '2023-02-06'
+tag: 'DeepDive'
 ---
 
 ## Compound Components Pattern
