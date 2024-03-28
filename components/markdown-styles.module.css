@@ -21,6 +21,11 @@
   color: white;
 }
 
+.markdown h1 {
+  margin: 76px 0;
+  color: rgb(255 255 219);
+}
+
 .markdown h2 {
   padding: 8px 0;
   margin: 10px 0;
