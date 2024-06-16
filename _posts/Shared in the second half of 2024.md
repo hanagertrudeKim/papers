@@ -1,10 +1,10 @@
 ---
 title: "💻 2024년 하반기 공유"
-date: "2024-03-29"
-tag: 'DeepDive'
+date: "2024-02-21"
+tag: "DeepDive"
 ---
 
-# import로 인한 순환 참조 문제를 해결하는 방법
+# 1. import로 인한 순환 참조 문제를 해결하는 방법
 
 ### Intro
 
@@ -22,23 +22,23 @@ tag: 'DeepDive'
 
 ```jsx
 // index.js
-import './a.js';
+import "./a.js";
 
 // a.js
-import { sayHello } from './b.js';
+import { sayHello } from "./b.js";
 
-export const NAME = 'mike';
+export const NAME = "mike";
 
-console.log('module_a');
+console.log("module_a");
 sayHello();
 
 // b.js
-import { NAME } from './a.js';
+import { NAME } from "./a.js";
 
-console.log('module_b');
+console.log("module_b");
 
 export const sayHello = () => {
-  console.log('hello~!', NAME);
+  console.log("hello~!", NAME);
 };
 ```
 
@@ -46,20 +46,20 @@ export const sayHello = () => {
 
 ```jsx
 export const sayHello = () => {
-	console.log('hello~!', aModuleObject.Name);
+  console.log("hello~!", aModuleObject.Name);
 };
 ```
 
-NAME 을 a 모듈의 객체라고 읽을 수 있는 이유는 `a.js` 에서 NAME 변수를 내보내는 시점이 `sayHello()` 호출부 이전 이기 때문입니다. 
+NAME 을 a 모듈의 객체라고 읽을 수 있는 이유는 `a.js` 에서 NAME 변수를 내보내는 시점이 `sayHello()` 호출부 이전 이기 때문입니다.
 
 만약 NAME 변수 내보내는 시점을 `sayHello()` 호출부 이후로 보내면 에러가 발생하게 됩니다. 이러한 문제들이 겹치게 되면, 순환 참조 문제가 생기게 된다고 설명합니다.
 
 ### 순환 참조에서 문제가 났을때 알아차리기 힘든 이유
 
 - ESM 에서는 모듈에서 없는 속성을 가져올때 에러가 발생합니다.
-⇒ 명시적으로 에러가 발생하기 때문에 순환 참조 오류를 빠르게 인식할 수 있습니다.
-- commonJS 에서는 모듈에서 없는 속성을 가져오면 일반적인 객체처럼 `undefined`가 반환되고 에러를 발생시키지 않습니다. 
-⇒ 순환 참조 문제를 쉽게 알아차리지 못합니다. (commonJS을 사용하는 웹팩의 경우 순환 참조 문제를 발견하기 힘듭니다.)
+  ⇒ 명시적으로 에러가 발생하기 때문에 순환 참조 오류를 빠르게 인식할 수 있습니다.
+- commonJS 에서는 모듈에서 없는 속성을 가져오면 일반적인 객체처럼 `undefined`가 반환되고 에러를 발생시키지 않습니다.
+  ⇒ 순환 참조 문제를 쉽게 알아차리지 못합니다. (commonJS을 사용하는 웹팩의 경우 순환 참조 문제를 발견하기 힘듭니다.)
 
 ### 가장 명시적인 해결 방법 - 내부 모듈 패턴(Internal module pattern)
 
@@ -73,32 +73,30 @@ NAME 을 a 모듈의 객체라고 읽을 수 있는 이유는 `a.js` 에서 NAME
 
 ```jsx
 // modules.js
-export * from './b.js';
-export * from './a.js';
+export * from "./b.js";
+export * from "./a.js";
 ```
 
 모듈 호출부는 다음과 같이 달라질 것입니다.
 
 ```jsx
 //index.js
-import { NAME,   sayHello } from './modules.js';
+import { NAME, sayHello } from "./modules.js";
 //a.js
-import { sayHello } from './modules.js';
+import { sayHello } from "./modules.js";
 //b.js
-import { NAME } from './modules.js';
+import { NAME } from "./modules.js";
 ```
 
 ### 요약
 
-- 순환 참조는 서로가 서로를 참조하는 형태입니다.  (a모듈 ↔ b모듈)
+- 순환 참조는 서로가 서로를 참조하는 형태입니다. (a모듈 ↔ b모듈)
 - 순환 참조는 CommonJS 환경에서 쉽게 발견하지 못합니다.
 - 내부적으로 모듈 평가 순서를 정의하는 파일을 따로 만들어 순환 참조 문제를 해결할 수 있습니다.
 
-
-
 --
 
-# Cache-Control, Expires를 빠뜨리면 브라우저에서 무슨 일이 일어날까?
+# 2. Cache-Control, Expires를 빠뜨리면 브라우저에서 무슨 일이 일어날까?
 
 http 캐시를 적극적으로 설정하고 제어함으로써 웹 성능을 높일 수 있다는 사실이 있습니다.
 
@@ -173,12 +171,11 @@ if ((response_code_ == net::HTTP_OK ||
 - [https://web.dev/articles/http-cache](https://web.dev/articles/http-cache)
 - [https://developer.mozilla.org/ko/docs/Web/HTTP/Caching](https://developer.mozilla.org/ko/docs/Web/HTTP/Caching)
 
-
 ㅡㅡ
 
-# CI/CD가 협업에 필요한 이유
+# 3. CI/CD가 협업에 필요한 이유
 
-협업 경험이 부족했을 때는 작업한 내용을 한 분기에 통합하고 해당 작업이 배포될 때까지의 파이프라인을 수동으로 검증해야 했던 기억이 있습니다. 
+협업 경험이 부족했을 때는 작업한 내용을 한 분기에 통합하고 해당 작업이 배포될 때까지의 파이프라인을 수동으로 검증해야 했던 기억이 있습니다.
 
 그러나 Github Action이라는 CI/CD 툴을 통해 협업 경험을 개선하면서, 브랜치를 병합하기 전 CI에서 테스트를 수행하고 배포 과정(CD)을 자동화할 수 있게 되었습니다.
 
@@ -195,7 +192,7 @@ CI/CD는 코드 변경 사항을 더 빠르고 안정적으로 제공하기 위�
 
 CI/CD 의 자세한 워크플로우 예시는 [여기](https://github.com/readme/guides/walking-the-walk-bringing-end-to-end-automation-and-testing-to-internal-teams)를 참고하면 좋을 것 같습니다.
 
-###CI/CD의 이점 
+###CI/CD의 이점
 
 [Google DevOps 보고서](https://cloud.google.com/blog/products/devops-sre/the-2019-accelerate-state-of-devops-elite-performance-productivity-and-scaling?hl=en)에 따르면, CI/CD를 사용하는 조직은 다른 조직보다 배포를 208배 더 자주하고 리드 타임이 106배 더 빠르다고 합니다. 그 외의 이점으로는 다음과 같습니다.
 
@@ -225,7 +222,7 @@ Runner 머신 구축 이후, 리포지토리 `.github/workflows` 디렉토리�
 
 1. Pick Reviewer
 
-PR 리뷰어를 커스텀하기 위해 도입되었습니다. PR이 열리면 정해진 구성 안에서 랜덤으로 리뷰어가 배정되며, 이 과정은 슬랙으로 알림이 연동됩니다. 
+PR 리뷰어를 커스텀하기 위해 도입되었습니다. PR이 열리면 정해진 구성 안에서 랜덤으로 리뷰어가 배정되며, 이 과정은 슬랙으로 알림이 연동됩니다.
 
 현재는 같은 도메인 팀 1명과 다른 도메인 팀 1명 구성으로 설정되어있습니다.
 
@@ -245,10 +242,12 @@ PR 리뷰어를 커스텀하기 위해 도입되었습니다. PR이 열리면 �
 References
 [CI/CD(CI CD, 지속적 통합/지속적 배포): 개념, 툴, 구축, 차이](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)[CI/CD란?](https://seongwon.dev/DevOps/20220713-CICD%EB%9E%80/)
 
-https://resources.github.com/ci-cd/ 
+https://resources.github.com/ci-cd/
 
 https://www.martinfowler.com/articles/originalContinuousIntegration.html
 
 https://it.donga.com/101955/
 
 [https://medium.com/naver-place-dev/github-actions를-활용한-개발-효율화-7df7a14b8843](https://medium.com/naver-place-dev/github-actions%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B0%9C%EB%B0%9C-%ED%9A%A8%EC%9C%A8%ED%99%94-7df7a14b8843)
+
+--
