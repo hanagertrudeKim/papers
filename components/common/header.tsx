@@ -52,7 +52,9 @@ const Header = () => {
           <Link href="/project">Project</Link>
         </Category>
         <Category>
-          <Link href="/about">About</Link>
+          <Link href="https://hanagertridekim.notion.site/Hana-Kim-9528a0cf680e45d0a596a719e9ca1b74">
+            About
+          </Link>
         </Category>
       </CategoryBox>
     </HeaderWrap>
