@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1E293B;
+  --bg-card: #162032;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --haiti: #FF6B6B;
+  --dr: #FFA500;
+  --korea: #3B82F6;
+  --usa: #10B981;
+  --border: rgba(148, 163, 184, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+.globe-canvas canvas {
+  outline: none;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes phone-float {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) rotateZ(-1deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-16px) rotateZ(1.5deg);
+  }
+}
+
+.ehr-phone-float {
+  animation: phone-float 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .font-display {
+    font-family: var(--font-dm-serif), serif;
+  }
+  .font-body {
+    font-family: var(--font-manrope), system-ui, sans-serif;
+  }
+  .font-code {
+    font-family: var(--font-jetbrains), monospace;
+  }
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #F8FAFC;
+}
