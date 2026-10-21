@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hana Kim — Global Problem Solving
 
-## Getting Started
+A single-screen portfolio journey. Scrolling changes projects and rotates the globe toward each project's location; the document itself does not scroll.
 
-First, run the development server:
+## Run
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Use Node.js 20, as specified by the original project.
+
+```sh
+npm ci
+npm run build
+npm run start -- --port 3001
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Navigation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Wheel / trackpad: next or previous project, with a short transition cooldown.
+- Up / down / left / right, Page Up / Page Down, Space, Home / End: navigate when focus is outside an interactive control.
+- Vertical mobile swipe, project stop buttons, or previous / next buttons.
+- Explore opens a native modal dialog with its own scroll area. Background project navigation pauses while a dialog is open.
+- Reduced-motion preference removes the globe's animated travel and text motion.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content
 
-## Learn More
+Project order and narrative: `lib/journey.ts`.
+Globe rendering and location focus: `components/Globe/JourneyGlobe.tsx`.
+The existing globe land layer is reused. Raised location pins, curved routes, and traveling markers connect the project regions. A visual fallback is included for browsers without WebGL.
 
-To learn more about Next.js, take a look at the following resources:
+Product previews use real screenshots in horizontally scrollable galleries, with previous/next controls and reduced-motion support. Revival identifies Hana as founder.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MaternalCare, OakTree, DICOM and KOIN descriptions use the supplied updated résumé. Revival uses the supplied app and description. Revival captures are static local assets, with no localhost dependency at runtime.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The production site is deployed from this repository through Vercel.
 
-## Deploy on Vercel
+## Current gallery layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Four stops: Revival, MaternalCare, DICOM & KOIN (a combined Korea chapter with separate project labels and metrics), then OakTree child sponsorship. Important screenshots sit above a short founder/engineering description and source-backed numbers. The globe retains location focus and routes with subtle teal/violet lighting and atmosphere animation. Reduced-motion preferences are respected.

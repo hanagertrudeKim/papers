@@ -22,13 +22,13 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hana Kim — Healthcare Software Engineer",
+  title: "Hana Kim — Global Problem Solving",
   description:
-    "Building healthcare software across 3 continents. From Seoul to Port-au-Prince, code that saves lives.",
+    "Software built around people and places. Explore Hana Kim’s projects across the Caribbean and South Korea.",
   openGraph: {
-    title: "Hana Kim — Healthcare Software Engineer",
+    title: "Hana Kim — Global Problem Solving",
     description:
-      "Building healthcare software across 3 continents. EHR systems in Haiti, medical data tools in Korea, and more.",
+      "A journey through mobile products, offline healthcare, and research tools across borders.",
     type: "website",
   },
 };
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${dmSerif.variable} ${manrope.variable} ${jetbrains.variable} font-body bg-bg-primary text-text-primary antialiased`}
+        className={`${dmSerif.variable} ${manrope.variable} ${jetbrains.variable} font-body antialiased`}
       >
         {children}
       </body>
