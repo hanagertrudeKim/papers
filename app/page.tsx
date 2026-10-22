@@ -59,7 +59,7 @@ export default function Home() {
       <section className="product-side" aria-label="Selected project">
         <div className="compact-identity"><h1>Hana Kim</h1><span>Software Engineer · Founder of Revival</span></div>
 
-        <div className="project-masthead"><div><p className="chapter-label">SELECTED WORK <span>{String(index+1).padStart(2,'0')} / 04</span></p><h2 id="project-title">{current.title}</h2></div><div className="project-meta"><span className="project-ownership">{current.role}</span><p className="project-place"><MapPin size={12}/>{current.place}</p></div></div>
+        <div className="project-masthead"><div><h2 id="project-title">{current.title}</h2></div><div className="project-meta"><span className="project-ownership">{current.role}</span><p className="project-place"><MapPin size={12}/>{current.place}</p></div></div>
         <AnimatedProjectPreview project={current} onExplore={()=>setPanel('project')}/>
         <AnimatePresence mode="wait" initial={false}><motion.div key={current.id} className="project-description" initial={{opacity:0,y:reduced?0:direction*8}} animate={{opacity:1,y:0}} exit={{opacity:0}} transition={{duration:reduced?0:.2}}>
           <p className="power-summary">{current.summary}</p>

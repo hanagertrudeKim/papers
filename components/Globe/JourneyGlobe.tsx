@@ -34,26 +34,20 @@ function MapPin({project,active,reduced}:{project:JourneyProject;active:boolean;
 }
 function Earth({project,reduced}:{project:JourneyProject;reduced:boolean}) {
   const globe = useRef<THREE.Group>(null);
-  const ring = useRef<THREE.Mesh>(null);
   const atmosphere=useRef<THREE.Mesh<THREE.BufferGeometry,THREE.MeshBasicMaterial>>(null);
   const target = useMemo(()=>{
     const p=latLngToVector3(project.lat,project.lng,1);
     return new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(p.x,p.y,p.z).normalize(),new THREE.Vector3(0,0,1));
   },[project]);
-  const stars=useMemo(()=>{const p=[];for(let i=0;i<180;i++){const y=1-2*i/179;const r=Math.sqrt(1-y*y);p.push(Math.cos(i*2.39996)*r*3.1,y*3.1,Math.sin(i*2.39996)*r*3.1);}return new Float32Array(p);},[]);
   useFrame((_,delta)=>{
     if(globe.current) {if(reduced)globe.current.quaternion.copy(target);else globe.current.quaternion.slerp(target,1-Math.exp(-delta*3.2));}
-    if(ring.current&&!reduced)ring.current.rotation.z+=delta*.025;
-    if(atmosphere.current)atmosphere.current.material.opacity=reduced?.07:.065+Math.sin(performance.now()/1800)*.012;
+    if(atmosphere.current)atmosphere.current.material.opacity=reduced?.035:.03+Math.sin(performance.now()/1800)*.005;
   });
   return <group>
-    <points><bufferGeometry><bufferAttribute attach="attributes-position" args={[stars,3]}/></bufferGeometry><pointsMaterial size={.009} color="#9bb9e7" transparent opacity={.35}/></points>
-    <mesh ref={ring} rotation={[1.2,.25,.3]}><torusGeometry args={[2.37,.002,8,180]}/><meshBasicMaterial color="#86d4d3" transparent opacity={.16}/></mesh>
-    <mesh rotation={[.8,.3,-.4]}><torusGeometry args={[2.57,.002,8,180]}/><meshBasicMaterial color="#b79af7" transparent opacity={.1}/></mesh>
     <group ref={globe}>
       <mesh><sphereGeometry args={[2,64,64]}/><meshStandardMaterial color="#153344" emissive="#102330" emissiveIntensity={.35} roughness={.65} metalness={.12}/></mesh>
       <mesh><sphereGeometry args={[2.009,48,24]}/><meshBasicMaterial color="#b2d6ff" wireframe transparent opacity={.018}/></mesh>
-      <mesh ref={atmosphere} scale={1.07}><sphereGeometry args={[2,48,48]}/><meshBasicMaterial color={project.color} transparent opacity={.07} side={THREE.BackSide}/></mesh>
+      <mesh ref={atmosphere} scale={1.025}><sphereGeometry args={[2,48,48]}/><meshBasicMaterial color={project.color} transparent opacity={.07} side={THREE.BackSide}/></mesh>
       <LandLayer/>
       <Route from={journey[0]} to={journey[2]} color="#8dc5b5" reduced={reduced}/>
       <Route from={journey[2]} to={journey[3]} color="#92b5ff" reduced={reduced}/>
