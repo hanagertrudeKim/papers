@@ -26,7 +26,7 @@ Project order and narrative: `lib/journey.ts`.
 Globe rendering and location focus: `components/Globe/JourneyGlobe.tsx`.
 The existing globe land layer is reused. Raised location pins, curved routes, and traveling markers connect the project regions. A visual fallback is included for browsers without WebGL.
 
-Product previews use real screenshots in horizontally scrollable galleries, with previous/next controls and reduced-motion support. Revival identifies Hana as founder.
+Product previews use real screenshots in horizontally scrollable galleries, with previous/next controls and reduced-motion support. Selecting a screenshot opens a native modal image viewer at that screen; arrow buttons, left/right keys, and horizontal swipes navigate within the project. Escape closes the viewer and restores focus. My contribution opens the separate case study. Revival identifies Hana as founder.
 
 MaternalCare, OakTree, DICOM and KOIN descriptions use the supplied updated résumé. Revival uses the supplied app and description. Revival captures are static local assets, with no localhost dependency at runtime.
 

@@ -2,18 +2,20 @@
 
 import dynamic from "next/dynamic";
 import ProjectDetails from "@/components/ProjectDetails";
+import ScreenViewer from "@/components/ScreenViewer";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, MapPin, X } from "lucide-react";
 import AnimatedProjectPreview from "@/components/AnimatedProjectPreview";
-import { journey } from "@/lib/journey";
+import { journey, projectSummaries } from "@/lib/journey";
 
 const Globe = dynamic(()=>import("@/components/Globe/JourneyGlobe"),{ssr:false,loading:()=> <div className="earth-fallback"/>});
 
 export default function Home() {
   const [index,setIndex]=useState(0);
   const [direction,setDirection]=useState(1);
-  const [panel,setPanel]=useState<"project"|"about"|null>(null);
+  const [panel,setPanel]=useState<"project"|"about"|"screens"|null>(null);
+  const [screenIndex,setScreenIndex]=useState(0);
   const reduced=!!useReducedMotion();
   const indexRef=useRef(0);
   const dialog=useRef<HTMLDialogElement>(null);
@@ -60,10 +62,9 @@ export default function Home() {
         <div className="compact-identity"><h1>Hana Kim</h1><span>Software Engineer · Founder of Revival</span></div>
 
         <div className="project-masthead"><div><h2 id="project-title">{current.title}</h2></div><div className="project-meta"><span className="project-ownership">{current.role}</span><p className="project-place"><MapPin size={12}/>{current.place}</p></div></div>
-        <AnimatedProjectPreview project={current} onExplore={()=>setPanel('project')}/>
+        <AnimatedProjectPreview project={current} onExplore={()=>setPanel('project')} onViewScreen={i=>{setScreenIndex(i);setPanel('screens');}}/>
         <AnimatePresence mode="wait" initial={false}><motion.div key={current.id} className="project-description" initial={{opacity:0,y:reduced?0:direction*8}} animate={{opacity:1,y:0}} exit={{opacity:0}} transition={{duration:reduced?0:.2}}>
-          <p className="power-summary">{current.summary}</p>
-          {current.id==='korea'?<div className="engineering-contributions"><p><span>DICOM</span> Resolved a private-tag privacy gap with batch anonymization and audit logs.</p><p><span>KOIN</span> Led shared front-end architecture, state management, and reusable components.</p></div>:<div className="project-decisions"><span>KEY DECISION</span><p>{current.decision}</p></div>}
+          <div className="work-summary"><div><h3>The project</h3><p className="power-summary">{projectSummaries[current.id].project}</p></div><div><h3>My contribution</h3>{current.id==='korea'?<div className="work-contributions"><p><span>DICOM</span> Built batch anonymization and audit logs.</p><p><span>KOIN</span> Led shared front-end architecture.</p></div>:<p className="contribution-summary">{projectSummaries[current.id].contribution}</p>}</div></div>
           <div className="project-metrics">{current.metrics.map(metric=><div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
           <p className="project-stack">{current.tech}</p>
         </motion.div></AnimatePresence>
@@ -74,6 +75,6 @@ export default function Home() {
     </main>
     <footer className="journey-controls"><div className="scroll-hint"><span className="scroll-icon"><ArrowDown size={13}/></span><span>{index===journey.length-1?'Journey complete. Scroll up to revisit.':'Scroll through my work'}<small>or use arrow keys</small></span></div><nav className="stops" aria-label="Project stops">{journey.map((p,i)=><button key={p.id} aria-label={`Go to ${p.title}`} aria-current={i===index?'step':undefined} onClick={()=>go(i)}><span className="stop-line"/><span className="stop-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><span>{p.title}</span></button>)}</nav><div className="step-arrows"><button aria-label="Previous project" disabled={index===0} onClick={()=>go(index-1)}><ArrowLeft size={17}/></button><button aria-label="Next project" disabled={index===journey.length-1} onClick={()=>go(index+1)}><ArrowRight size={17}/></button></div><nav className="utility-links" aria-label="Portfolio information"><button onClick={()=>setPanel('about')}>About</button><a href="/HanaKim_Resume.pdf" target="_blank" rel="noreferrer">Résumé <ArrowUpRight size={11}/></a><a href="mailto:rlagksk8428@gmail.com">Contact <ArrowUpRight size={11}/></a></nav></footer>
     <div className="sr-only" aria-live="polite">Project {index+1} of {journey.length}: {current.title}, {current.place}.</div>
-    <dialog ref={dialog} onCancel={()=>setPanel(null)} onClose={()=>setPanel(null)} onClick={e=>{if(e.target===dialog.current)setPanel(null);}} aria-labelledby="dialog-title"><div className="detail-panel"><button autoFocus className="close-panel" aria-label="Close details" onClick={()=>setPanel(null)}><X size={20}/></button>{panel==='about'?<><p className="theme">BEHIND THE WORK</p><h2 id="dialog-title">Hana Kim<br/>Software Engineer</h2><p>I’m Hana, a software engineer building products around the people and places that need them — from medical research in Korea to mobile clinics and local services in the Caribbean.</p><div className="about-route"><span>South Korea</span><ArrowRight size={15}/><span>Haiti</span><ArrowRight size={15}/><span>Dominican Republic</span></div><p>My work spans iOS, front-end systems, offline healthcare, and medical-data privacy. I listen in the field, turn constraints into design decisions, and ship tools people can use.</p><a className="detail-link" href="mailto:rlagksk8428@gmail.com">Contact me <ArrowUpRight size={15}/></a></>:<ProjectDetails key={current.id} project={current}/>}</div></dialog>
+    <dialog className={panel==='screens'?'screen-dialog':undefined} ref={dialog} onCancel={()=>setPanel(null)} onClose={()=>setPanel(null)} onClick={e=>{if(e.target===dialog.current)setPanel(null);}} aria-labelledby="dialog-title"><div className={panel==='screens'?'screen-panel':'detail-panel'}><button autoFocus className="close-panel" aria-label={panel==='screens'?'Close screen viewer':'Close details'} onClick={()=>setPanel(null)}><X size={20}/></button>{panel==='screens'?<ScreenViewer project={current} index={screenIndex} onChange={setScreenIndex}/>:panel==='about'?<><p className="theme">BEHIND THE WORK</p><h2 id="dialog-title">Hana Kim<br/>Software Engineer</h2><p>I’m Hana, a software engineer building products around the people and places that need them — from medical research in Korea to mobile clinics and local services in the Caribbean.</p><div className="about-route"><span>South Korea</span><ArrowRight size={15}/><span>Haiti</span><ArrowRight size={15}/><span>Dominican Republic</span></div><p>My work spans iOS, front-end systems, offline healthcare, and medical-data privacy. I listen in the field, turn constraints into design decisions, and ship tools people can use.</p><a className="detail-link" href="mailto:rlagksk8428@gmail.com">Contact me <ArrowUpRight size={15}/></a></>:<ProjectDetails key={current.id} project={current}/>}</div></dialog>
   </div>;
 }
