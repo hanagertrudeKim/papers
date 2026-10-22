@@ -4,7 +4,7 @@ A single-screen portfolio journey. Scrolling changes projects and rotates the gl
 
 ## Run
 
-Use Node.js 20, as specified by the original project.
+Use Node.js 24, matching the Vercel deployment runtime.
 
 ```sh
 npm ci
