@@ -1,10 +1,10 @@
-# Hana Kim — Global Problem Solving
+# Hana Kim — Portfolio
 
-A single-screen portfolio journey. Scrolling changes projects and rotates the globe toward each project's location; the document itself does not scroll.
+A black, vertically scrolling portfolio with a centered introduction and large horizontal project galleries. The visual structure follows the supplied Greg Sarafian reference, using Hana's own projects, content, and screenshots.
 
 ## Run
 
-Use Node.js 24, matching the Vercel deployment runtime.
+Use Node.js 24, matching Vercel.
 
 ```sh
 npm ci
@@ -12,26 +12,14 @@ npm run build
 npm run start -- --port 3001
 ```
 
-## Navigation
+## Projects and interactions
 
-- Wheel / trackpad: next or previous project, with a short transition cooldown.
-- Up / down / left / right, Page Up / Page Down, Space, Home / End: navigate when focus is outside an interactive control.
-- Vertical mobile swipe, project stop buttons, or previous / next buttons.
-- Explore opens a native modal dialog with its own scroll area. Background project navigation pauses while a dialog is open.
-- Reduced-motion preference removes the globe's animated travel and text motion.
+Four cards: Revival, MaternalCare, DICOM & KOIN, and OakTree. Country flags describe project regions. Each card shows the product type and Hana's contribution, with more context and results in its detail dialog.
 
-## Content
+Galleries support horizontal swipe, trackpad scrolling, arrow buttons, and keyboard arrows. Visible galleries advance slowly; hover, focus, touch, and opening a dialog pause playback. Each has a pause/play control, and reduced-motion preferences disable automatic motion.
 
-Project order and narrative: `lib/journey.ts`.
-Globe rendering and location focus: `components/Globe/JourneyGlobe.tsx`.
-The existing globe land layer is reused. Raised location pins, curved routes, and traveling markers connect the project regions. A visual fallback is included for browsers without WebGL.
+Selecting a screenshot opens a native modal at that screen. Arrow buttons, left/right keys, and horizontal swipes navigate within the project. Escape closes the viewer and restores focus. The diagonal-arrow button opens the separate case study.
 
-Product previews use real screenshots in horizontally scrollable galleries, with previous/next controls and reduced-motion support. Selecting a screenshot opens a native modal image viewer at that screen; arrow buttons, left/right keys, and horizontal swipes navigate within the project. Escape closes the viewer and restores focus. My contribution opens the separate case study. Revival identifies Hana as founder.
+Project data: `lib/journey.ts`. Detailed notes: `lib/case-notes.ts`. Screenshots: `public/portfolio-images/`. Runtime images do not depend on localhost.
 
-MaternalCare, OakTree, DICOM and KOIN descriptions use the supplied updated résumé. Revival uses the supplied app and description. Revival captures are static local assets, with no localhost dependency at runtime.
-
-The production site is deployed from this repository through Vercel.
-
-## Current gallery layout
-
-Four stops: Revival, MaternalCare, DICOM & KOIN (a combined Korea chapter with separate project labels and metrics), then OakTree child sponsorship. Important screenshots sit above a short founder/engineering description and source-backed numbers. The globe retains location focus and routes with subtle teal/violet lighting and atmosphere animation. Reduced-motion preferences are respected.
+The earlier globe journey remains in Git history and its unused components are retained for reuse. The current homepage uses ordinary page scrolling.
