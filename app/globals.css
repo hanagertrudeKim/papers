@@ -472,3 +472,48 @@ dialog::backdrop{background:#000b;backdrop-filter:blur(8px)}
  .wide-gallery .gallery-shot img{width:auto;max-width:none;height:calc(100% - 26px)}
 }
 @media(max-width:360px){.gallery-controls>div{gap:2px}.gallery-controls button:last-child{min-width:110px;font-size:11px}.gallery-controls .gallery-hint{font-size:10px}}
+/* Recruiter scan: product type, ownership, and clearly scoped geography. */
+.project-title-group{min-width:0}
+.project-type{font-size:15px;line-height:1.55;color:#c0c9ce;margin:8px 0 0}
+.project-meta{align-self:flex-end;gap:8px}
+.project-ownership{font-size:15px;color:var(--accent);font-weight:500}
+.project-region{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:12px;line-height:1.5;color:#c2cbd0}
+.region-label{font-size:10px;color:#91a2ac;letter-spacing:.3px}
+.region-countries{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px 12px}
+.region-country{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.country-flag{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:19px;line-height:1.1}
+.detail-panel>.project-region{align-items:flex-start;margin:0 0 16px}
+.detail-panel .region-countries{justify-content:flex-start}
+@media(min-width:701px){
+ .project-masthead{align-items:flex-end;margin-top:4px}
+ .compact-identity{margin-bottom:16px}
+ .context-side{padding-bottom:20px}
+ .gallery-controls{height:44px}
+}
+@media(min-width:701px) and (max-height:840px){
+ .project-type{font-size:13px;margin-top:5px}
+ .project-ownership{font-size:13px}
+ .project-meta{gap:5px}.project-region{font-size:11px;gap:2px}.region-label{font-size:10px}
+ .compact-identity{margin-bottom:12px}
+}
+@media(max-width:700px){
+ .compact-identity{min-height:28px;margin-bottom:10px}
+ .project-masthead{gap:6px;min-height:118px;margin-bottom:10px}
+ .project-type{font-size:12px;line-height:1.5;margin-top:4px;color:#bdc9cf}
+ .project-meta{align-items:flex-start;align-self:auto;gap:5px}
+ .project-ownership{font-size:12px;line-height:1.5}
+ .project-region{align-items:flex-start;font-size:11px;gap:0}
+ .region-countries{justify-content:flex-start;gap:3px 10px}
+ .region-label{display:none}
+ .country-flag{font-size:17px}
+ .context-side{top:48px}
+ .detail-panel .region-label{display:block}
+}
+@media(max-width:700px) and (max-height:740px){
+ .project-masthead{min-height:106px;margin-bottom:8px}
+ .project-type{font-size:11px;margin-top:3px}
+ .project-meta{gap:3px}
+ .project-ownership{font-size:11px}
+ .context-side{top:42px}
+ .mobile-gallery{min-height:140px}
+}
