@@ -21,7 +21,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-dm-serif)", "serif"],
-        body: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
         code: ["var(--font-jetbrains)", "monospace"],
       },
       animation: {

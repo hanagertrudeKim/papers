@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Manrope, JetBrains_Mono } from "next/font/google";
+import { DM_Serif_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const dmSerif = DM_Serif_Display({
@@ -9,9 +9,9 @@ const dmSerif = DM_Serif_Display({
   display: "swap",
 });
 
-const manrope = Manrope({
+const bodyFont = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${dmSerif.variable} ${manrope.variable} ${jetbrains.variable} font-body antialiased`}
+        className={`${dmSerif.variable} ${bodyFont.variable} ${jetbrains.variable} font-body antialiased`}
       >
         {children}
       </body>
