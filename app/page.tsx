@@ -1,32 +1,66 @@
-"use client";
-import {useEffect,useRef,useState} from 'react';
-import {FileText,Mail,X} from 'lucide-react';
-import ProjectShowcase from '@/components/ProjectShowcase';
-import ProjectDetails from '@/components/ProjectDetails';
-import ScreenViewer from '@/components/ScreenViewer';
-import {journey} from '@/lib/journey';
+import { ArrowUpRight } from 'lucide-react';
+import ProjectGallery from '@/components/ProjectGallery';
+import { projects } from '@/lib/portfolio';
 
-export default function Home(){
- const [panel,setPanel]=useState<'project'|'screens'|null>(null);
- const [projectId,setProjectId]=useState(journey[0].id);
- const [screenIndex,setScreenIndex]=useState(0);
- const dialog=useRef<HTMLDialogElement>(null);
- const project=journey.find(item=>item.id===projectId)||journey[0];
- useEffect(()=>{
-  if(panel&&!dialog.current?.open)dialog.current?.showModal();
-  else if(!panel&&dialog.current?.open)dialog.current?.close();
- },[panel]);
- return <div className="portfolio">
-  <header className="profile-header">
-   <div className="profile-avatar" aria-hidden="true">HK</div>
-   <h1>Hana Kim</h1>
-   <p>Software Engineer · Founder of <a href="#revival">Revival</a></p>
-   <nav className="profile-links" aria-label="Contact and résumé"><a href="https://github.com/hanagertrudeKim" target="_blank" rel="noreferrer" aria-label="Hana Kim on GitHub" title="GitHub"><svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.94.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.1-1.15 3.1-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.64 5.27-5.15 5.55.4.35.76 1.04.76 2.1v3.07c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/></svg></a><a href="mailto:rlagksk8428@gmail.com" aria-label="Email Hana" title="Email"><Mail size={25}/></a><a href="/HanaKim_Resume.pdf" target="_blank" rel="noreferrer" aria-label="Download résumé" title="Résumé"><FileText size={24}/></a></nav>
-  </header>
-  <main className="selected-projects" aria-label="Selected projects">{journey.map(item=><ProjectShowcase key={item.id} project={item} modalOpen={!!panel} onView={index=>{setProjectId(item.id);setScreenIndex(index);setPanel('screens');}} onDetails={()=>{setProjectId(item.id);setPanel('project');}}/>)}</main>
-  <footer className="portfolio-footer"><span>© 2026 Hana Kim</span><a href="mailto:rlagksk8428@gmail.com">Get in touch</a></footer>
-  <dialog ref={dialog} className={panel==='screens'?'screen-dialog':undefined} aria-labelledby="dialog-title" onCancel={()=>setPanel(null)} onClose={()=>setPanel(null)} onClick={event=>{if(event.target===dialog.current)setPanel(null);}}>
-   <div className={panel==='screens'?'screen-panel':'detail-panel'}><button autoFocus className="close-panel" aria-label={panel==='screens'?'Close screen viewer':'Close details'} onClick={()=>setPanel(null)}><X size={21}/></button>{panel==='screens'?<ScreenViewer project={project} index={screenIndex} onChange={setScreenIndex}/>:<ProjectDetails key={project.id} project={project}/>}</div>
-  </dialog>
- </div>;
+const contactLinks = [
+  { label: 'Résumé', href: '/HanaKim_Resume.pdf' },
+  { label: 'GitHub', href: 'https://github.com/hanagertrudeKim' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/hana-gertrude-kim' },
+  { label: 'Email', href: 'mailto:rlagksk8428@gmail.com' },
+];
+
+export default function Home({ searchParams }: { searchParams: { revival?: string } }) {
+  const visibleProjects = projects.filter(project => project.id !== 'revival' || searchParams.revival !== 'hidden');
+  return <div className="portfolio-page" id="top">
+    <a className="skip-link" href="#main">Skip to content</a>
+    <header className="page-grid site-header">
+      <a className="section-label home-link" href="#top">Portfolio</a>
+      <div className="header-content"><a className="name-link" href="#top">Hana Kim</a></div>
+    </header>
+    <main id="main">
+      <section className="page-grid about-section" aria-labelledby="about-label">
+        <h1 className="section-label" id="about-label">About</h1>
+        <div className="about-content">
+          <p>Hi, I’m Hana. My work has helped reduce clinic workflow time by an estimated <strong>25%</strong>, cut DICOM preparation time by approximately <strong>33%</strong>, and increase code reuse in a shared React codebase by approximately <strong>55%</strong>. Across healthcare and developer tools, I get there by listening closely, questioning my assumptions, and working through approaches that fall short. I build for the person using the software and the teammate maintaining it.</p>
+          <p>I’ve spent years teaching Hapkido and Taekwondo, especially to kids; their questions keep me on my toes. Away from the keyboard, I play songs by ear on the piano, write music, and sing with more enthusiasm than polish. I love exploring other cultures, preferably over food. My enthusiasm for spicy food continues to outrun my survival instinct.</p>
+        </div>
+      </section>
+      <nav className="page-grid project-index" aria-labelledby="projects-label">
+        <h2 className="section-label" id="projects-label">Projects</h2>
+        <ol>{visibleProjects.map(project => <li key={project.id}><a href={`#${project.id}`}>{project.title}</a><span> ({project.shortDescription})</span></li>)}</ol>
+      </nav>
+      <div className="case-studies">
+        {visibleProjects.map((project, index) => <article className="page-grid case-study" id={project.id} key={project.id} aria-labelledby={`${project.id}-title`}>
+          <aside className="project-aside"><span className="section-label">{String(index + 1).padStart(2, '0')}</span></aside>
+          <div className="case-content">
+            <header className="case-header">
+              <h2 id={`${project.id}-title`}>{project.title}</h2>
+              <ul className="tech-tags" aria-label={`${project.title} technologies`}>{project.technologies.map(tech => <li key={tech}>{tech}</li>)}</ul>
+            </header>
+            <p className="project-intro">{project.intro}</p>
+            <div className="project-columns">
+              <section aria-labelledby={`${project.id}-problem`}><h3 id={`${project.id}-problem`}>Problem</h3><p>{project.problem}</p></section>
+              <section aria-labelledby={`${project.id}-insights`}><h3 id={`${project.id}-insights`}>Insights</h3><p>{project.insights}</p></section>
+              <section aria-labelledby={`${project.id}-solution`}><h3 id={`${project.id}-solution`}>Solution</h3>{project.solution.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</section>
+            </div>
+            {project.notes && <details className="engineering-notes"><summary>Working notes and code</summary><div className="notes-content">{project.notes.map((block, index) => block.kind === 'paragraph' ? <p key={index}>{block.text}</p> : block.kind === 'code' ? <figure className="code-excerpt" key={index}><pre tabIndex={0} aria-label={`${block.language} code excerpt`}><code>{block.code}</code></pre><figcaption>{block.caption}</figcaption></figure> : null)}</div></details>}
+            {project.contextGallery && <ProjectGallery images={project.contextGallery.images} title={`${project.title} — Context`} kind="desktop" caption={project.contextGallery.caption} />}
+            {project.fieldGallery && <div className="field-gallery"><ProjectGallery images={project.fieldGallery.images} title={`${project.title} — In the field`} kind="desktop" caption={project.fieldGallery.caption} /></div>}
+            <ProjectGallery images={project.images} title={project.title} kind={project.galleryKind} caption={project.galleryCaption} />
+            <p className="project-takeaway"><strong>Takeaway:</strong> <span>{project.takeaway}</span></p>
+            {project.links.length > 0 && <nav className="project-links" aria-label={`${project.title} resources`}>{project.links.map(link => <a href={link.href} key={link.label} target="_blank" rel="noreferrer">{link.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}</nav>}
+          </div>
+        </article>)}
+      </div>
+      <section className="page-grid background-section" aria-labelledby="background-label">
+        <h2 className="section-label" id="background-label">Background</h2>
+        <div className="background-content"><div><h3>Education</h3><p>Gordon College<br /><span>B.S. in Computer Science · Expected 2028</span></p><p>KOREATECH<br /><span>Computer Science coursework · 2022–2024</span></p></div><div><h3>Toolkit</h3><p>Swift, TypeScript, JavaScript, Python</p><p>SwiftUI, Core Data, React, React Query, Zustand, PyQt6, pydicom, GitHub Actions</p></div></div>
+      </section>
+      <section className="page-grid contact-section" aria-labelledby="contact-label">
+        <h2 className="section-label" id="contact-label">Get in touch</h2>
+        <div><p>I’m looking for Software Engineer internships and opportunities to build and learn.</p><nav className="contact-links" aria-label="Contact and résumé">{contactLinks.map(link => <a key={link.label} href={link.href} target={link.href.startsWith('mailto:') ? undefined : '_blank'} rel="noreferrer">{link.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}</nav></div>
+      </section>
+    </main>
+    <footer className="page-grid site-footer"><span>© {new Date().getFullYear()} Hana Kim</span><div><span>Built with care.</span><a href="#top">Back to top ↑</a></div></footer>
+  </div>;
 }

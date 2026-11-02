@@ -43,8 +43,7 @@ const locationGroups = [
         ],
         tech: ["Swift", "SwiftUI", "CoreData", "iOS", "Claude Code"],
         images: [
-          { src: "/portfolio-images/ehr-field.JPG", alt: "Hana showing the EHR app to a nurse at a mobile clinic in Haiti", objectPosition: "center 40%" },
-          { src: "/portfolio-images/ehr-monthly-checklist.jpeg", alt: "EHR monthly checklist — patient Widline Amucy" },
+          { src: "/portfolio-images/ehr-monthly-checklist.jpeg", alt: "EHR monthly checklist with personal information redacted" },
           { src: "/portfolio-images/ehr-consultation.jpeg", alt: "EHR consultation history view" },
           { src: "/portfolio-images/ehr-sonography.jpeg", alt: "EHR birth plan and sonography data entry" },
         ],
@@ -77,7 +76,6 @@ const locationGroups = [
         ],
         tech: ["React", "TypeScript", "TailwindCSS", "Vercel"],
         images: [
-          { src: "/portfolio-images/sponsorship-website.png", alt: "OakTree Ministry — Haiti La Gonave project page" },
           { src: "/portfolio-images/sponsorship-payment.png", alt: "Child sponsorship profile and payment flow" },
         ],
         link: "https://oaktree-ministry.vercel.app",

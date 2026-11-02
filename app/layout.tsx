@@ -1,19 +1,6 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Inter, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const dmSerif = DM_Serif_Display({
-  weight: ["400"],
-  subsets: ["latin"],
-  variable: "--font-dm-serif",
-  display: "swap",
-});
-
-const bodyFont = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
@@ -22,13 +9,13 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hana Kim — Global Problem Solving",
+  title: "Hana Kim — Software Engineer",
   description:
-    "Software built around people and places. Explore Hana Kim’s projects across the Caribbean and South Korea.",
+    "Software engineer and Gordon College CS student building offline healthcare tools, research software, and maintainable web products. Seeking SWE internships.",
   openGraph: {
-    title: "Hana Kim — Global Problem Solving",
+    title: "Hana Kim — Software Engineer",
     description:
-      "A journey through mobile products, offline healthcare, and research tools across borders.",
+      "Selected work in offline healthcare, medical imaging, and shared front-end systems.",
     type: "website",
   },
 };
@@ -39,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
-        className={`${dmSerif.variable} ${bodyFont.variable} ${jetbrains.variable} font-body antialiased`}
+        className={`${jetbrains.variable} antialiased`}
       >
         {children}
       </body>

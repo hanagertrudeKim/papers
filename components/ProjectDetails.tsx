@@ -16,6 +16,5 @@ export default function ProjectDetails({project}:{project:JourneyProject}){
  <h3>Key decision</h3><p>{note.decision}</p>
  <h3>Result & scope</h3><p className="detail-result">{note.result}</p><p>{note.scope}</p>
  <h3>Product evidence</h3><div className={`detail-images ${project.mobile?'mobile-details':''}`}>{note.images.map((src,i)=><Image key={src} unoptimized src={`/portfolio-images/${src}`} alt={`${note.title} product evidence ${i+1}`} width={project.mobile?390:1100} height={project.mobile?844:750}/>)}</div>
- {project.id==='maternalcare'&&<figure className="case-field-photo"><Image unoptimized src="/portfolio-images/ehr-field.JPG" alt="Hana working directly with a nurse at a mobile clinic" width={1000} height={650}/><figcaption>Working with nurses in the field to refine the clinical workflow.</figcaption></figure>}
  <p className="tech">{note.tech}</p>{project.link&&<a className="detail-link" href={project.link} target="_blank" rel="noreferrer">Visit project <ArrowUpRight size={15}/></a>}</>;
 }

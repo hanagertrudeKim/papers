@@ -21,6 +21,10 @@
 *.pem
 .claude/
 
+# Private working references and unredacted originals are never publishable assets.
+/planning/portfolio-renewal/review-only/
+/output/previews/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
