@@ -1,4 +1,5 @@
 import { dicomStory, type StoryBlock } from './dicom-story';
+import { compoundComponentNotes, errorHandlingNotes, stateMigrationNotes } from './koin-story';
 
 export type PortfolioImage = { src: string; alt: string; label: string; width: number; height: number; quality?: number };
 export type PortfolioProject = {
@@ -7,6 +8,7 @@ export type PortfolioProject = {
   images: PortfolioImage[]; galleryKind: 'mobile' | 'desktop'; galleryCaption: string;
   fieldGallery?: { images: PortfolioImage[]; caption: string };
   contextGallery?: { images: PortfolioImage[]; caption: string };
+  noteGroups?: { id: string; title: string; description: string; blocks: StoryBlock[] }[];
   notes?: StoryBlock[]; links: { label: string; href: string }[];
 };
 
@@ -14,11 +16,11 @@ export type PortfolioProject = {
 export const projects: PortfolioProject[] = [
   {
     id: 'maternal-care', title: 'Maternal Care EHR', shortDescription: 'Prenatal records, available offline',
-    technologies: ['Swift', 'SwiftUI', 'Core Data', 'Offline storage'],
-    intro: 'I redesigned an offline iOS EHR for mobile maternal care in partnership with Global Care and KOICA. The app was deployed in approximately eight areas in the Dominican Republic.',
+    technologies: ['Swift', 'SwiftUI', 'Core Data', 'Parse', 'Offline storage'],
+    intro: 'I co-built and operated an EHR across eight regions in the Dominican Republic for two years, supporting 4,500+ patient records and 6,400+ clinic visits for Global Care’s $140K KOICA-funded project. I also independently designed, built, and launched a prenatal care app tracking 350 expectant mothers.',
     problem: 'Patients returned weeks after a visit, often without medical documentation. Staff had to reconstruct their history from memory, including previous blood-pressure readings. Unreliable connectivity and limited time between patients made recording and retrieving that information harder.',
     insights: 'Observing clinic days changed where I started the redesign. Each appointment needed to become part of a continuing patient history, and staff needed to reach that history offline. Feedback also showed how closely the forms needed to follow the information staff used during a visit.',
-    solution: ['I linked visit-specific records to a single patient history with Core Data and simplified prenatal checklists around blood pressure, gestational age, and risk flags. The estimated reduction in clinic workflow time was approximately 25%.', 'I also built a dashboard that computes diagnosis and medication frequencies and surfaces the five most common entries in each category. The three-month analysis in my résumé covered 780 diagnosis and medication records, not 780 patients.'],
+    solution: ['In the shared EHR, I organized waiting lists by patient status to streamline patient flow, using Swift and SwiftUI with Core Data for local storage and a Parse backend for synchronization. In the prenatal care app, I built a dedicated monthly maternal-care management tab and simplified checklists around blood pressure, gestational age, and risk flags.', 'I also built physician dashboards that identified diabetes as the leading prenatal risk in the data. Those findings informed diabetes-prevention seminars and requests for additional medication funding, connecting the records collected during clinic visits to care-planning decisions.'],
     fieldGallery: { images: [{ src: '/portfolio-images/ehr-field-demo-v1.png', alt: 'A discussion around a phone during clinic work, with peripheral faces redacted.', label: 'A conversation during clinic work', width: 1448, height: 1086 }], caption: 'The clinic setting that shaped the EHR. Peripheral faces and identifying details are redacted.' },
     images: [
       { src: '/portfolio-images/ehr-roster-v2.png', alt: 'Patient roster with identifying details redacted.', label: 'Patient list', width: 851, height: 1849 },
@@ -26,8 +28,8 @@ export const projects: PortfolioProject[] = [
       { src: '/portfolio-images/ehr-history-v3.png', alt: 'Medical history with diagnoses, medications and vital signs visible; patient identity is redacted.', label: 'Medical history', width: 851, height: 1848 },
       { src: '/portfolio-images/ehr-analytics-v2.png', alt: 'Aggregate clinical trends and diagnosis and medication frequency charts.', label: 'Clinical analytics', width: 1206, height: 2622 },
     ],
-    galleryKind: 'mobile', galleryCaption: 'Four connected parts of the clinical workflow. Patient identities and visit dates are redacted; clinical values remain visible. Dashboard totals are shown as captured and differ from the résumé’s separate 780-record analysis.',
-    takeaway: 'Clinic conditions became design requirements. Linking visits and simplifying forms helped the team carry information into the next appointment, even when the connection could not be counted on.', links: [],
+    galleryKind: 'mobile', galleryCaption: 'Patient lists, monthly prenatal care, medical history, and analytics. Patient identities and visit dates are redacted; clinical values remain visible. Dashboard totals reflect the captured view, rather than the full two-year operating totals.',
+    takeaway: 'Two years of operation made continuity part of the design: records had to remain useful at the next appointment, and aggregate findings had to help physicians plan care. Field feedback shaped both the clinical workflow and the prenatal care app.', links: [],
   },
   {
     id: 'dicom', title: 'DICOM Anonymizer', shortDescription: 'Batch processing for medical research',
@@ -54,20 +56,24 @@ export const projects: PortfolioProject[] = [
   },
   {
     id: 'koin', title: 'KOIN', shortDescription: 'Engineering for a shared React codebase',
-    technologies: ['React', 'TypeScript', 'Zustand', 'Axios', 'GitHub Actions', 'Code reviews'],
-    intro: 'As a front-end engineer and team lead at BCSD Labs, I worked with backend engineers and designers on campus services, shared components, and the conventions developers used to maintain them.',
-    problem: 'Repeated UI patterns and inconsistent state and error handling increased maintenance work across a shared React codebase. API errors needed additional branching in clients, and the team also spent time on manual coordination around pull requests.',
-    insights: 'A useful change had to be understandable by the next developer. For error handling, that meant distinguishing application errors from other Axios failures through a shared representation. Reviews and documentation were how those decisions became usable across the team.',
-    solution: ['I built shared React and TypeScript components, migrated state from Recoil to Zustand, and documented typed error conventions with utilities and Slack reporting. I also reviewed code and mentored developers.', 'GitHub Actions and Slack notifications reduced manual steps in the pull-request workflow. My résumé reports approximately 55% more code reuse, 45% fewer errors from the state/error-handling work, and 25% less pull-request workflow time.'],
+    technologies: ['React', 'TypeScript', 'Ant Design', 'Zustand', 'Zod', 'Axios', 'GitHub Actions'],
+    intro: 'KOIN is a campus community platform for students at KOREATECH in South Korea. As a front-end engineer and team lead at BCSD Labs, I worked with backend engineers and designers on campus services, shared components, and the conventions developers used to maintain them.',
+    problem: 'Admin pages repeatedly implemented the same form controls, while image uploads mixed API data with UI objects. Each feature also interpreted API failures independently, making user feedback and error reporting inconsistent.',
+    insights: 'Both problems called for shared boundaries: reusable controls for forms, and a common error contract between the API client and feature code. Pages should define their fields and responses without repeating infrastructure logic.',
+    solution: ['I built composable forms and separated upload data from UI objects. Shared API clients, Zod validation, and a typed error contract gave features a consistent way to check responses and handle failures.', 'I packaged common utilities for reuse, led the Recoil-to-Zustand migration through reviews and mentoring, and built Bbi-bot for Slack error reporting.'],
     images: [
       { src: '/portfolio-images/koin-service.png', alt: 'KOIN campus service showing nearby businesses and categories.', label: 'Campus-service interface', width: 1458, height: 990 },
-      { src: '/portfolio-images/koin-error-convention.png', alt: 'Hana Kim’s 2024 KOIN wiki documenting the need for consistent API error handling.', label: 'My error-handling convention', width: 896, height: 480 },
     ],
-    galleryKind: 'desktop', galleryCaption: 'The team’s campus-service interface and my published 2024 error-handling convention. The documentation capture shows the original problem and shared response format.',
-    takeaway: 'The team’s ability to keep building depended on shared understanding. A reusable component, a clear convention, and a useful review could help well beyond my own changes.',
+    galleryKind: 'desktop', galleryCaption: 'KOIN’s student-facing local-business directory. The guide above explains the screen in English. My form components and error-handling work support the broader platform; this screenshot shows the product context.',
+    noteGroups: [
+      { id: 'compound-components', title: 'Reusable forms', description: 'Composing Ant Design controls and untangling image-upload types in KOIN Admin.', blocks: compoundComponentNotes },
+      { id: 'error-handling', title: 'API contracts and shared utilities', description: 'Runtime validation, error handling, and packaging common functions for reuse.', blocks: errorHandlingNotes },
+      { id: 'state-migration', title: 'Moving from Recoil to Zustand', description: 'Choosing a shared state approach and helping the team adopt it in KOIN Service.', blocks: stateMigrationNotes },
+    ],
+    takeaway: 'Shared code needed a shared understanding. Reusable forms, API contracts, and a state migration became more useful when teammates could follow the reasoning, review the changes, and apply the same approach in their own work.',
     links: [
       { label: 'Source code', href: 'https://github.com/BCSDLab/KOIN_WEB_RECODE' },
-      { label: 'Error convention', href: 'https://github.com/BCSDLab/KOIN_WEB_RECODE/wiki/Koin-Error-Convention-(2024)' },
+      { label: 'Error-handling case study (English)', href: 'https://github.com/hanagertrudeKim/engineering-case-studies/blob/main/koin-error-handling.md' },
     ],
   },
   {

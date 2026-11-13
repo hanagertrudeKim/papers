@@ -1,5 +1,8 @@
 import { ArrowUpRight } from 'lucide-react';
 import ProjectGallery from '@/components/ProjectGallery';
+import EngineeringNotes from '@/components/EngineeringNotes';
+import KoinScreenGuide from '@/components/KoinScreenGuide';
+import BbiBotCaseStudy from '@/components/BbiBotCaseStudy';
 import { projects } from '@/lib/portfolio';
 
 const contactLinks = [
@@ -21,7 +24,7 @@ export default function Home({ searchParams }: { searchParams: { revival?: strin
       <section className="page-grid about-section" aria-labelledby="about-label">
         <h1 className="section-label" id="about-label">About</h1>
         <div className="about-content">
-          <p>Hi, I’m Hana. My work has helped reduce clinic workflow time by an estimated <strong>25%</strong>, cut DICOM preparation time by approximately <strong>33%</strong>, and increase code reuse in a shared React codebase by approximately <strong>55%</strong>. Across healthcare and developer tools, I get there by listening closely, questioning my assumptions, and working through approaches that fall short. I build for the person using the software and the teammate maintaining it.</p>
+          <p>Hi, I’m Hana. I build software that people rely on in their daily work. I co-built and operated an EHR across <strong>eight regions</strong> in the Dominican Republic for <strong>two years</strong>, supporting <strong>4,500+ patient records</strong> and <strong>6,400+ clinic visits</strong>. I also independently designed and launched a prenatal care app tracking <strong>350 expectant mothers</strong>. Across healthcare and developer tools, I turn real workflows into software that people can use and teammates can maintain.</p>
           <p>I’ve spent years teaching Hapkido and Taekwondo, especially to kids; their questions keep me on my toes. Away from the keyboard, I play songs by ear on the piano, write music, and sing with more enthusiasm than polish. I love exploring other cultures, preferably over food. My enthusiasm for spicy food continues to outrun my survival instinct.</p>
         </div>
       </section>
@@ -43,9 +46,11 @@ export default function Home({ searchParams }: { searchParams: { revival?: strin
               <section aria-labelledby={`${project.id}-insights`}><h3 id={`${project.id}-insights`}>Insights</h3><p>{project.insights}</p></section>
               <section aria-labelledby={`${project.id}-solution`}><h3 id={`${project.id}-solution`}>Solution</h3>{project.solution.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</section>
             </div>
-            {project.notes && <details className="engineering-notes"><summary>Working notes and code</summary><div className="notes-content">{project.notes.map((block, index) => block.kind === 'paragraph' ? <p key={index}>{block.text}</p> : block.kind === 'code' ? <figure className="code-excerpt" key={index}><pre tabIndex={0} aria-label={`${block.language} code excerpt`}><code>{block.code}</code></pre><figcaption>{block.caption}</figcaption></figure> : null)}</div></details>}
+            {project.notes && <EngineeringNotes title="Working notes and code" blocks={project.notes} />}
+            {project.noteGroups && <div className="note-groups" aria-label={`${project.title} engineering topics`}>{project.noteGroups.map(group => <EngineeringNotes key={group.id} id={`${project.id}-${group.id}`} title={group.title} description={group.description} blocks={group.blocks} />)}{project.id === 'koin' && <BbiBotCaseStudy />}</div>}
             {project.contextGallery && <ProjectGallery images={project.contextGallery.images} title={`${project.title} — Context`} kind="desktop" caption={project.contextGallery.caption} />}
             {project.fieldGallery && <div className="field-gallery"><ProjectGallery images={project.fieldGallery.images} title={`${project.title} — In the field`} kind="desktop" caption={project.fieldGallery.caption} /></div>}
+            {project.id === 'koin' && <KoinScreenGuide />}
             <ProjectGallery images={project.images} title={project.title} kind={project.galleryKind} caption={project.galleryCaption} />
             <p className="project-takeaway"><strong>Takeaway:</strong> <span>{project.takeaway}</span></p>
             {project.links.length > 0 && <nav className="project-links" aria-label={`${project.title} resources`}>{project.links.map(link => <a href={link.href} key={link.label} target="_blank" rel="noreferrer">{link.label}<ArrowUpRight size={14} aria-hidden="true" /></a>)}</nav>}
