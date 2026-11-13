@@ -24,7 +24,7 @@ export default function Home({ searchParams }: { searchParams: { revival?: strin
       <section className="page-grid about-section" aria-labelledby="about-label">
         <h1 className="section-label" id="about-label">About</h1>
         <div className="about-content">
-          <p>Hi, I’m Hana. I build software that people rely on in their daily work. I co-built and operated an EHR across <strong>eight regions</strong> in the Dominican Republic for <strong>two years</strong>, supporting <strong>4,500+ patient records</strong> and <strong>6,400+ clinic visits</strong>. I also independently designed and launched a prenatal care app tracking <strong>350 expectant mothers</strong>. Across healthcare and developer tools, I turn real workflows into software that people can use and teammates can maintain.</p>
+          <p>Hi, I’m Hana. I build software that people rely on in their daily work. I co-built and operated an EHR across eight regions in the Dominican Republic, supporting 6,400+ clinic visits. I also independently designed and launched a prenatal care app tracking 350 expectant mothers. Across healthcare and developer tools, I turn real workflows into software that people can use and teammates can maintain.</p>
           <p>I’ve spent years teaching Hapkido and Taekwondo, especially to kids; their questions keep me on my toes. Away from the keyboard, I play songs by ear on the piano, write music, and sing with more enthusiasm than polish. I love exploring other cultures, preferably over food. My enthusiasm for spicy food continues to outrun my survival instinct.</p>
         </div>
       </section>
